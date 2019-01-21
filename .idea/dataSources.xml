@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="sakila@localhost" uuid="feebb373-f3bd-48a0-9c10-cad9d5594911">
+    <data-source source="LOCAL" name="UsersTestPersistenceUnit/Hibernate" uuid="7d07b159-e19d-4984-8aef-207bb6b138d3">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml</remarks>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/sakila</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/users_test</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

@@ -4,6 +4,7 @@ package model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "language")
 public class Language {
 
     @Id

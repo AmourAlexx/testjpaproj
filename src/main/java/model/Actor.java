@@ -5,13 +5,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "actor")
+@NamedQueries({
+        @NamedQuery(name = "Actor.findAll", query = "select a from Actor a")
+})
 public class Actor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long actorId;
 
     private String firstName;
+
     private String lastName;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
