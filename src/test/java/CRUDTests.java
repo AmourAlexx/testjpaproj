@@ -1,3 +1,5 @@
+import model.Actor;
+import model.Film;
 import model.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +11,7 @@ public class CRUDTests {
 
     private EntityManager em;
 
-    private Long testId = 7L;
+    private Long testId = 9L;
 
     @Before
     public void setUp() throws Exception {
@@ -21,13 +23,21 @@ public class CRUDTests {
     @Test
     public void create() {
         em.getTransaction().begin();
-        User a = new User();
-        a.setLogin("Test");
-        a.setEmail("test@test.com");
-        a.setPassword("qwerty");
+        Actor a = new Actor();
+        a.setLastName("Testov");
+        a.setFirstName("Test");
+
+        Film f1 = new Film();
+        f1.setTitle("Film 1");
+        f1.setLength(90);
+        f1.setRentalDuration(180);
+        f1.setRentalRate(4.5);
+        f1.setReplacementCost(24.45);
+        a.getFilms().add(f1);
+
         em.persist(a);
         em.getTransaction().commit();
-        testId = a.getId();
+        testId = a.getActorId();
         System.out.println("create -- "+a);
     }
 
@@ -59,7 +69,7 @@ public class CRUDTests {
     }
 
     private User findUser(long id){
-        return (User)em.createNamedQuery("User.finById", User.class)
+        return (User)em.createNamedQuery("User.findById", User.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }

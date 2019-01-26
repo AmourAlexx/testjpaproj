@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Film {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id")
     private long filmId;
 
@@ -21,6 +21,8 @@ public class Film {
 
     private long rentalDuration;
     private double rentalRate;
+
+    @Column(nullable = false)
     private long length;
     private double replacementCost;
     private String rating;
