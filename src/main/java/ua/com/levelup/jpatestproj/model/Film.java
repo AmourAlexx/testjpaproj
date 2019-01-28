@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "film")
@@ -27,6 +29,12 @@ public class Film {
     private double replacementCost;
     private String rating;
     private String specialFeatures;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinTable(name = "film_actor",
+            inverseJoinColumns = {@JoinColumn(name = "actor_id")},
+            joinColumns = {@JoinColumn(name = "film_id")})
+    private Set<Actor> actors = new HashSet<Actor>();
 
 
     public long getFilmId() {
