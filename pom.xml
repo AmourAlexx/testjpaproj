@@ -45,7 +45,18 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.46</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/ru.dezhik/sms-sender -->
+        <dependency>
+            <groupId>ru.dezhik</groupId>
+            <artifactId>sms-sender</artifactId>
+            <version>0.1.1</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.1.1.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>

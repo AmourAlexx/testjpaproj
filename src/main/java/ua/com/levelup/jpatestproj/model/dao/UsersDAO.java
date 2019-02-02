@@ -1,7 +1,7 @@
-package model.dao;
+package ua.com.levelup.jpatestproj.model.dao;
 
-import model.User;
-import service.EM;
+import ua.com.levelup.jpatestproj.model.User;
+import ua.com.levelup.jpatestproj.service.EM;
 
 import java.util.List;
 

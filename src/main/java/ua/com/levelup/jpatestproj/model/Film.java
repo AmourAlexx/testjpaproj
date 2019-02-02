@@ -1,4 +1,4 @@
-package model;
+package ua.com.levelup.jpatestproj.model;
 
 import javax.persistence.*;
 import java.util.HashSet;

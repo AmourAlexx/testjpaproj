@@ -1,4 +1,4 @@
-package model.dao;
+package ua.com.levelup.jpatestproj.model.dao;
 
 import java.util.List;
 

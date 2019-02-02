@@ -1,7 +1,13 @@
-package beans;
+package ua.com.levelup.jpatestproj.beans;
 
 public class Fruit {
     private String name;
+
+    public Fruit(){}
+
+    public Fruit(String name){
+        this.name = name;
+    }
 
     public String getName() {
         return name;

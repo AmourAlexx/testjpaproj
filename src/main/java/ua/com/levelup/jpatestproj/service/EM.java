@@ -1,4 +1,4 @@
-package service;
+package ua.com.levelup.jpatestproj.service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
