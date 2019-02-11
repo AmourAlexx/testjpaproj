@@ -15,7 +15,7 @@ public class Film {
 
     private String title;
     private String description;
-    private String releaseYear;
+    private Integer releaseYear;
 
     @ManyToOne
     @JoinColumn(name = "language_id")
@@ -64,11 +64,11 @@ public class Film {
     }
 
 
-    public String getReleaseYear() {
+    public Integer getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(String releaseYear) {
+    public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
     }
 

@@ -1,11 +1,14 @@
-import model.Actor;
-import model.Film;
-import model.User;
+import ua.com.levelup.jpatestproj.model.Actor;
+import ua.com.levelup.jpatestproj.model.Film;
+import ua.com.levelup.jpatestproj.model.User;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CRUDTests {
 
@@ -24,7 +27,7 @@ public class CRUDTests {
     public void create() {
         em.getTransaction().begin();
         Actor a = new Actor();
-        a.setLastName("Testov");
+        a.setLastName("Smith");
         a.setFirstName("Test");
 
         Film f1 = new Film();
@@ -74,11 +77,40 @@ public class CRUDTests {
                 .getSingleResult();
     }
 
-    /*@Test
-    public void name() throws  Exception{
-        Class<?> joinTable = Thread.currentThread().getContextClassLoader()
-                .loadClass(JoinTable.class.getName());
+    @Test
+    public void simpleQ() {
+        String hql = "select f, a.lastName " +
+                "from Film f " +
+                "join f.actors a " +
+                "where a.lastName like 'Smith' and a.firstName like 'Test'";
+        List res = em.createQuery(hql).getResultList();
+        System.out.println(res);
+    }
 
-        System.out.println(Arrays.asList(joinTable.getDeclaredMethods()));
-    }*/
+
+    public void criteriaQ(String lastName, String firstName) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Film> query = cb.createQuery(Film.class);
+        Root<Film> r = query.from(Film.class);
+        query.select(r);
+        Join act = r.join("actors");
+
+        List<Predicate> whereBlock = new ArrayList<Predicate>();
+        if(lastName != null)
+            whereBlock.add(cb.like(act.get("lastName").as(String.class),lastName));
+        if(firstName != null)
+            whereBlock.add(cb.like(act.get("firstName"),firstName));
+
+        Predicate[] arr = new Predicate[whereBlock.size()];
+        whereBlock.toArray(arr);
+        query.where(arr);
+
+        List res = em.createQuery(query).getResultList();
+        System.out.println(res);
+    }
+
+    @Test
+    public void critTest() {
+        criteriaQ("Smith","Test");
+    }
 }
