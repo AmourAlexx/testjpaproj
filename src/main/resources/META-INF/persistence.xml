@@ -8,11 +8,11 @@
     <persistence-unit name="testPU">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/users_test"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.username" value="root"/>
-            <property name="hibernate.connection.password" value="qwerty"/>
+            <property name="hibernate.connection.password" value="admin"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>

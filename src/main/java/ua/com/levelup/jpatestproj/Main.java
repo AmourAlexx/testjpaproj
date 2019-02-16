@@ -6,6 +6,10 @@ import ua.com.levelup.jpatestproj.beans.Apple;
 import ua.com.levelup.jpatestproj.beans.Apricot;
 import ua.com.levelup.jpatestproj.beans.Fruit;
 import ua.com.levelup.jpatestproj.beans.Peach;
+import ua.com.levelup.jpatestproj.model.Film;
+import ua.com.levelup.jpatestproj.repo.FilmRepo;
+
+import java.util.List;
 
 public class Main {
 
@@ -13,12 +17,7 @@ public class Main {
         ApplicationContext ctx
                 = new AnnotationConfigApplicationContext(MyConfig.class);
 
-        //Apple a = (Apple)ctx.getBean("apple");
-        Peach p = ctx.getBean(Peach.class);
-        //Apricot a2 = ctx.getBean("aprMy", Apricot.class);
-
-        Apple a1 = ctx.getBean("iMy",Apple.class);
-
-        Fruit f = ctx.getBean(Fruit.class);
+        FilmRepo r = ctx.getBean(FilmRepo.class);
+        List<Film> lst = r.findByTitleLikeAndRentalRate("film 1", 4.6);
     }
 }
