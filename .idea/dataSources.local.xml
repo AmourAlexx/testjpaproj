@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="UsersTestPersistenceUnit/Hibernate" uuid="7d07b159-e19d-4984-8aef-207bb6b138d3">
+    <data-source name="testPU/Hibernate" uuid="15a026c9-2609-451a-8fd6-0e670cdf37eb">
       <database-info product="MySQL" version="5.7.14-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e )">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
