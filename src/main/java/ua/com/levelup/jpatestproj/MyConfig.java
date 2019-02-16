@@ -1,9 +1,6 @@
 package ua.com.levelup.jpatestproj;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -36,7 +33,7 @@ public class MyConfig {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/users_test?createDatabaseIfNotExist=true");
         dataSource.setUsername( "root" );
-        dataSource.setPassword( "admin" );
+        dataSource.setPassword( "qwerty" );
         return dataSource;
     }
 
@@ -66,8 +63,7 @@ public class MyConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(
-            EntityManagerFactory emf){
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
 

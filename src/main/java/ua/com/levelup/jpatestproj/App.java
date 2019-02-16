@@ -1,21 +1,16 @@
 package ua.com.levelup.jpatestproj;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ua.com.levelup.jpatestproj.model.Film;
-import ua.com.levelup.jpatestproj.model.Language;
-import ua.com.levelup.jpatestproj.repo.FilmRepo;
-import ua.com.levelup.jpatestproj.repo.LanguageRepo;
+import org.springframework.context.annotation.Import;
 
-import java.util.List;
-
-@SpringBootApplication
-public class Main {
+@SpringBootApplication//нужно добавить, чтоб класс воспринимался как точка входа в Спринг
+@Import(MyConfig.class)//все необходимые конфиги добавить или так, или указать в настройках проекта в Spring-фасетах (Ctrl+Alt+Shift+S)
+public class App {
 
     public static void main(String[] args){
-        SpringApplication.run(Main.class);
+        SpringApplication.run(App.class);//всё, что нужно
         /*ApplicationContext ctx
                 = new AnnotationConfigApplicationContext(MyConfig.class);
 
