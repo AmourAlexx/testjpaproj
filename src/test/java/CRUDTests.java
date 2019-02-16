@@ -113,4 +113,9 @@ public class CRUDTests {
     public void critTest() {
         criteriaQ("Smith","Test");
     }
+
+    @Test
+    public void springjpa() {
+
+    }
 }

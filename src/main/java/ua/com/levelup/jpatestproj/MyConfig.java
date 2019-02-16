@@ -4,26 +4,78 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ua.com.levelup.jpatestproj.beans.Apple;
 import ua.com.levelup.jpatestproj.beans.Apricot;
 import ua.com.levelup.jpatestproj.beans.Fruit;
 import ua.com.levelup.jpatestproj.beans.Peach;
 
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 import java.time.LocalDate;
+import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = {"ua.com.levelup.jpatestproj.beans"})
+@EnableJpaRepositories(basePackages = {"ua.com.levelup.jpatestproj.repo"})
+@EnableTransactionManagement
 public class MyConfig {
 
+    @Bean
+    public DataSource dataSource(){
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/users_test?createDatabaseIfNotExist=true");
+        dataSource.setUsername( "root" );
+        dataSource.setPassword( "admin" );
+        return dataSource;
+    }
 
     @Bean
-    public Fruit getFruitOfToday(){
-        int i = LocalDate.now().getDayOfWeek().getValue()/2;
-        switch (i){
-            case 1: return new Peach();
-            case 2: return new Apple();
-            case 3: return new Apricot();
-        }
-        return null;
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean em
+                = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(dataSource());
+        em.setPackagesToScan("ua.com.levelup.jpatestproj.model");
+
+        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        em.setJpaVendorAdapter(vendorAdapter);
+        em.setJpaProperties(additionalProperties());
+
+        return em;
+    }
+
+    private Properties additionalProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");
+        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.format_sql", "true");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.dialect.storage_engine", "innodb");
+
+        return properties;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(
+            EntityManagerFactory emf){
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emf);
+
+        return transactionManager;
+    }
+
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+        return new PersistenceExceptionTranslationPostProcessor();
     }
 }
