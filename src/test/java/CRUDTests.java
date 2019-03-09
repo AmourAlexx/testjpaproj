@@ -1,5 +1,6 @@
 import ua.com.levelup.jpatestproj.model.Actor;
 import ua.com.levelup.jpatestproj.model.Film;
+import ua.com.levelup.jpatestproj.model.Language;
 import ua.com.levelup.jpatestproj.model.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,22 +28,27 @@ public class CRUDTests {
     public void create() {
         em.getTransaction().begin();
         Actor a = new Actor();
-        a.setLastName("Smith");
-        a.setFirstName("Test");
+        a.setLastName("Sam");
+        a.setFirstName("Smith");
 
         Film f1 = new Film();
-        f1.setTitle("Film 1");
+        f1.setTitle("Film 2");
         f1.setLength(90);
         f1.setRentalDuration(180);
         f1.setRentalRate(4.5);
         f1.setReplacementCost(24.45);
         a.getFilms().add(f1);
 
+        Language l = new Language();
+        l.setName("English");
+        f1.setLanguage(l);
+
         em.persist(a);
         em.getTransaction().commit();
         testId = a.getActorId();
         System.out.println("create -- "+a);
     }
+
 
     @Test
     public void read() {

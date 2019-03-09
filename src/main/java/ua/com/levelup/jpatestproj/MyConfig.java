@@ -1,33 +1,25 @@
 package ua.com.levelup.jpatestproj;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import ua.com.levelup.jpatestproj.beans.Apple;
-import ua.com.levelup.jpatestproj.beans.Apricot;
-import ua.com.levelup.jpatestproj.beans.Fruit;
-import ua.com.levelup.jpatestproj.beans.Peach;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.time.LocalDate;
 import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories(basePackages = {"ua.com.levelup.jpatestproj.repo"})
 @EnableTransactionManagement
+
 public class MyConfig {
 
     @Bean
@@ -36,7 +28,7 @@ public class MyConfig {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/users_test?createDatabaseIfNotExist=true");
         dataSource.setUsername( "root" );
-        dataSource.setPassword( "admin" );
+        dataSource.setPassword( "qwerty" );
         return dataSource;
     }
 
@@ -66,8 +58,7 @@ public class MyConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(
-            EntityManagerFactory emf){
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
 
